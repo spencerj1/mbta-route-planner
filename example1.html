@@ -35,19 +35,49 @@
     </div>
   </nav>
 
-  <div id= "example1" class="container-md border rounded">
+  <div id= "example1" class="container-md border rounded" style="margin-top: 20px; padding-top: 20px">
     <form class="container-md">
       <div class="form-group">
-        <h3> Example 1: Retrieve data representing all subway routes </h2>
+        <h2> Example 1: Retrieve data representing all subway routes </h2>
         <hr class="my-4">
         	Click the button below to output all "Light Rail" and "Heavy Rail" routes fetched
         	from the https://api-v3.mbta.com/routes endpoint.
         </hr>
-        <div>
-        	<button type="submit" class="btn btn-primary">Get All Routes</button>
-    	</div>
+        <div style="margin-top: 20px">
+        	<button onclick="getRoutes()" type="button" class="btn btn-primary">
+            Get All Routes
+          </button>
+    	  </div>
       </div>
     </form>
   </div>
+
+  <div class="container-md" style="margin-top: 20px">
+    <ul id= "routeList" class="list-group">
+    </ul>
+  </div>
 </body>
+<script>
+  let template;
+  $.ajax({
+    url: '/routeTemplate',
+    cache: true,
+    success: function(data) {
+        const source = data;
+        template = Handlebars.compile(source); //Using Handlebars as the templating engine
+    }               
+  })
+
+  function getRoutes() {
+    $.ajax({
+      url: '/example1/solution',
+      success: function(data) {
+        $(data).each(function (index, value) {
+          let html = template(value); //Replace each empty field in html template with parsed RSS data
+          $('#routeList').append(html); //Inject finalized template into article list html element
+        });
+      }
+    })
+  }
+</script>
 </html> 

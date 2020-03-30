@@ -23,10 +23,7 @@ app.get('/example1/solution', function (req, res) {
 });
 
 app.get('/routeTemplate', function (req, res) { 
-  const routes = example1.getRoutes( function(result) {
-    console.log(result)
-    res.status(200).send(result)
-  })
+  res.status(200).sendFile('./html/templates/route.html', { root: __dirname })
 });
 
 app.get('/example2', function (req, res) { 
