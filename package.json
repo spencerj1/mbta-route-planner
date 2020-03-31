@@ -10,6 +10,7 @@
   "dependencies": {
     "express": "^4.x.x",
     "body-parser": "^1.x.x",
-    "axios": "0.19.2"
+    "axios": "0.19.2",
+    "q": "1.5.1"
   }
 }

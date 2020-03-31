@@ -1,0 +1,83 @@
+ <!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MBTA Route Planner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>	
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="" id="nav-title">MBTA Route Planner</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/example1" id="nav-example1">Example 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/example2" id="nav-example2">Example 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="" id="nav-example3">Example 3</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id= "example1" class="container-md border rounded" style="margin-top: 20px; padding-top: 20px">
+    <form class="container-md">
+      <div class="form-group">
+        <h2> Example 1: Retrieve data representing all subway routes </h2>
+        <hr class="my-4">
+        	Click the button below to output all "Light Rail" and "Heavy Rail" routes fetched
+        	from the https://api-v3.mbta.com/routes endpoint.
+        </hr>
+        <div style="margin-top: 20px">
+        	<button onclick="getRoutes()" type="button" class="btn btn-primary">
+            Get All Routes
+          </button>
+    	  </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container-md" style="margin-top: 20px">
+    <ul id= "routeList" class="list-group">
+    </ul>
+  </div>
+</body>
+<script>
+  let template;
+  $.ajax({
+    url: '/routeTemplate1',
+    cache: true,
+    success: function(data) {
+        const source = data;
+        template = Handlebars.compile(source); //Using Handlebars as the templating engine
+    }               
+  })
+
+  function getRoutes() {
+    $.ajax({
+      url: '/example1/solution',
+      success: function(data) {
+        $(data).each(function (index, value) {
+          let html = template(value); //Replace each empty field in html template with parsed RSS data
+          $('#routeList').append(html); //Inject finalized template into article list html element
+        });
+      }
+    })
+  }
+</script>
+</html> 

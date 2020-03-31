@@ -3,35 +3,60 @@ const bodyParser = require('body-parser');
 const url = require('url');
 const app = express();
 const port = process.env.PORT || 8080;
-const example1 = require('./example1.js')
+const example1 = require('./js/example1.js')
+const example2 = require('./js/example2.js')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) { 
-  res.status(200).sendFile('./index.html', { root: __dirname })
+  res.status(200).sendFile('./html/index.html', { root: __dirname })
 });
 
 app.get('/example1', function (req, res) { 
-  res.status(200).sendFile('./example1.html', { root: __dirname })
+  res.status(200).sendFile('./html/example1.html', { root: __dirname })
+});
+
+app.get('/example2', function (req, res) { 
+  res.status(200).sendFile('./html/example2.html', { root: __dirname })
+});
+
+app.get('/example3', function (req, res) { 
+  res.status(200).sendFile('./html/example3.html', { root: __dirname })
+});
+
+app.get('/example1Template', function (req, res) { 
+  res.status(200).sendFile('./html/templates/example1Template.html', { root: __dirname })
+});
+
+app.get('/example2Template1', function (req, res) { 
+  res.status(200).sendFile('./html/templates/example2Template1.html', { root: __dirname })
+});
+
+app.get('/example2Template2', function (req, res) { 
+  res.status(200).sendFile('./html/templates/example2Template2.html', { root: __dirname })
 });
 
 app.get('/example1/solution', function (req, res) { 
-  const routes = example1.getRoutes( function(result) {
+  example1.getRoutes( function(result) {
     console.log(result)
     res.status(200).send(result)
   })
 });
 
-app.get('/routeTemplate', function (req, res) { 
-  res.status(200).sendFile('./html/templates/route.html', { root: __dirname })
+app.get('/example2/solution1', function (req, res) { 
+  example2.getAllRouteStops( function(routeStopList) {
+    example2.getStopRange(routeStopList, function(resultJson) {
+      res.status(200).send(resultJson)
+    })
+  })
 });
 
-app.get('/example2', function (req, res) { 
-  res.status(200).sendFile('./example2.html', { root: __dirname })
-});
-
-app.get('/example3', function (req, res) { 
-  res.status(200).sendFile('./example3.html', { root: __dirname })
+app.get('/example2/solution2', function (req, res) { 
+  example2.getAllRouteStops( function(routeStopList) {
+    example2.getIntersectingStops(routeStopList, function(resultJson) {
+      res.status(200).send(resultJson)
+    })
+  })
 });
 
 app.use(function (err, req, res, next) {
