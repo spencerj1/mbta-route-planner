@@ -35,13 +35,14 @@
     </div>
   </nav>
 
-  <div id= "example1" class="container-md border rounded" style="margin-top: 20px; padding-top: 20px">
+  <div id= "example2" class="container-md border rounded" style="margin-top: 20px; padding-top: 20px">
     <form class="container-md">
       <div class="form-group">
-        <h2> Example 1: Retrieve data representing all subway routes </h2>
+        <h2> Example 2: Retrieve data representing route stops</h2>
         <hr class="my-4">
-        	Click the button below to output all "Light Rail" and "Heavy Rail" routes fetched
-        	from the https://api-v3.mbta.com/routes endpoint.
+        	Click the first button below to retreive all of the stops with multiple intersecting lines
+          Click the second button to retreive the line with the most total stops, as well as the line
+          with the least total stops
         </hr>
         <div style="margin-top: 20px">
         	<button onclick="getIntersectingRoutes()" type="button" class="btn btn-success">
