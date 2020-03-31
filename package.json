@@ -1,16 +1,14 @@
 {
-  "name": "slackbot",
-  "version": "1.0.0",
-  "description": "slackbot",
-  "main": "index.js",
+  "name": "mbta-route-planner",
+  "version": "0.0.1",
+  "description": "MBTA Route Planner",
+  "main": "app.js",
   "scripts": {
-    "test": "Hello World"
   },
-  "author": "James",
+  "author": "James Spencer",
   "dependencies": {
     "express": "^4.x.x",
     "body-parser": "^1.x.x",
-    "axios": "0.19.2",
-    "q": "1.5.1"
+    "axios": "0.19.2"
   }
 }
