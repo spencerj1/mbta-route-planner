@@ -5,6 +5,7 @@ module.exports = {
   }
 }
 
+// Function for fetching all rail routes from the MBTA API
 function getAllRoutes(callback){
   axios.get('https://api-v3.mbta.com/routes?filter[type]=0,1')
   .then((res) => {
@@ -15,6 +16,8 @@ function getAllRoutes(callback){
   })
 };
 
+// Slim down the response JSON to only contain the fields we need
+// to return to the frontend
 function trimData(responseJson, callback){
   let routeArray = []
   responseJson.data.forEach(object => {
