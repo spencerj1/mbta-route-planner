@@ -1,6 +1,8 @@
 # mbta-route-planner
 > Small NodeJS web application for retreiving data from the MBTA V3 API
 
+This app is currently hosted at: https://mbta-route-planner.herokuapp.com/
+
 ## Setup
 1. Install NodeJS - download can be found here: https://nodejs.org/en/download/
 2. Clone the repository.
