@@ -12,8 +12,8 @@ This app is currently hosted at: https://mbta-route-planner.herokuapp.com/
 
 ## Overview
 The javascript used to provide a solution for each example can be found in the `/js` folder,
-seperated by file. Examples 1 and 2 are server-side JS modules, which provide the solution to the
-HTML frontend via the `/solution` endpoints specified in app.js. Example 3 is JS executed in the browser, and leverages
+seperated by file. Examples 1 and 2 are server-side JS modules, which provide a JSON solution to the
+frontend via the `/solution` endpoints specified in app.js. Example 3 is JS executed in the browser, and leverages
 the `/solution` endpoints from examples 1 and 2.
 
 ## Things I should definitely do different/Possible future updates
