@@ -1,12 +1,12 @@
-  let template1
+  let template
   let allRouteStops
   let allIntersectingStops
   $.ajax({
-    url: '/example2Template1',
+    url: '/example3Template',
     cache: true,
     success: function(data) {
         const source = data
-        template1 = Handlebars.compile(source) //Using Handlebars as the templating engine
+        template = Handlebars.compile(source) //Using Handlebars as the templating engine
     }               
   })
 
@@ -21,6 +21,8 @@
         	$(`<option>${index}</option>`).appendTo('#startLineSelector')
         	$(`<option>${index}</option>`).appendTo('#destinationLineSelector')
         })
+        populateSelector($('#startLineSelector option:selected').text(), '#startStationSelector')
+        populateSelector($('#destinationLineSelector option:selected').text(), '#destinationStationSelector')
     }               
   })
 
@@ -72,7 +74,9 @@
         						if (intersectingStops[station2].lines.includes(connectingLine)
         					 	&& intersectingStops[station2].lines.includes(endLine)){
         							route.push({[connectingLine]: station})
-        							route.push({[endLine]: station2})
+        							if(station2 != endStation){
+        								route.push({[endLine]: station2})
+        							}
         							route.push({[endLine]: endStation})
         							callback(route)
         							return
@@ -92,7 +96,21 @@
    }
 
    function displayRoute() {
+   	 $('#routeList').empty()
    	 const route = calculateRoute(function(route){
-   	 	console.log(route)
+   	 	$.each(route, function(index, value) {
+   	 		let routeJson = {}
+   	 		if (index == 0){
+   	 			routeJson["instruction"] = "Get on"
+   	 		}else if(index == route.length - 1) {
+   	 			routeJson["instruction"] = "Get off"
+   	 		}else{
+   	 			routeJson["instruction"] = "Transfer to"
+   	 		}
+   	 		routeJson["line"] = Object.keys(value)
+   	 		routeJson["stop"] = Object.values(value)
+   	 		let html = template(routeJson) 
+          	$('#routeList').append(html)
+   	 	})
    	 })
    }

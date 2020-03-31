@@ -36,6 +36,10 @@ app.get('/example2Template2', function (req, res) {
   res.status(200).sendFile('./html/templates/example2Template2.html', { root: __dirname })
 });
 
+app.get('/example3Template', function (req, res) { 
+  res.status(200).sendFile('./html/templates/example3Template.html', { root: __dirname })
+});
+
 app.get('/js/example3', function (req, res) { 
   res.status(200).sendFile('./js/example3.js', { root: __dirname })
 });
