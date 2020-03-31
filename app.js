@@ -36,6 +36,10 @@ app.get('/example2Template2', function (req, res) {
   res.status(200).sendFile('./html/templates/example2Template2.html', { root: __dirname })
 });
 
+app.get('/js/example3', function (req, res) { 
+  res.status(200).sendFile('./js/example3.js', { root: __dirname })
+});
+
 app.get('/example1/solution', function (req, res) { 
   example1.getRoutes( function(result) {
     console.log(result)
@@ -43,7 +47,13 @@ app.get('/example1/solution', function (req, res) {
   })
 });
 
-app.get('/example2/solution1', function (req, res) { 
+app.get('/example2/getAllStops', function (req, res) { 
+  example2.getAllRouteStops( function(routeStopList) {
+    res.status(200).send(routeStopList)
+  })
+});
+
+app.get('/example2/getStopRange', function (req, res) { 
   example2.getAllRouteStops( function(routeStopList) {
     example2.getStopRange(routeStopList, function(resultJson) {
       res.status(200).send(resultJson)
@@ -51,7 +61,7 @@ app.get('/example2/solution1', function (req, res) {
   })
 });
 
-app.get('/example2/solution2', function (req, res) { 
+app.get('/example2/getIntersectingStops', function (req, res) { 
   example2.getAllRouteStops( function(routeStopList) {
     example2.getIntersectingStops(routeStopList, function(resultJson) {
       res.status(200).send(resultJson)

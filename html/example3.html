@@ -35,7 +35,7 @@
     </div>
   </nav>
 
-  <div id= "example1" class="container-md border rounded" style="margin-top: 20px; padding-top: 20px">
+  <div id= "example3" class="container-md border rounded" style="margin-top: 20px; padding-top: 20px">
     <form class="container-md">
       <div class="form-group">
         <h2> Example 1: Retrieve data representing all subway routes </h2>
@@ -43,41 +43,46 @@
         	Click the button below to output all "Light Rail" and "Heavy Rail" routes fetched
         	from the https://api-v3.mbta.com/routes endpoint.
         </hr>
+        <hr class="my-4">
+        	<h3>Starting Point</h3>
+        </hr>
+        <div class="form-group">
+    		<label for="startLineSelector">Choose Line</label>
+    		<select class="form-control" id="startLineSelector">
+    		</select>
+  		</div>
+  		<div class="form-group">
+    		<label for="startStationSelector">Choose Station</label>
+    		<select class="form-control" id="startStationSelector">
+    		</select>
+  		</div>
+  		<hr class="my-4">
+        	<h3>Destination</h3>
+        </hr>
+  		<div class="form-group">
+    		<label for="destinationLineSelector">Choose Line</label>
+    		<select class="form-control" id="destinationLineSelector">
+    		</select>
+  		</div>
+  		<div class="form-group">
+    		<label for="destinationStationSelector">Choose Station</label>
+    		<select class="form-control" id="destinationStationSelector">
+    		</select>
+  		</div>
         <div style="margin-top: 20px">
-        	<button onclick="getRoutes()" type="button" class="btn btn-primary">
-            Get All Routes
+        	<button onclick="displayRoute()" type="button" class="btn btn-success">
+            Calculate Route
           </button>
-    	  </div>
+    	</div>
       </div>
     </form>
   </div>
 
   <div class="container-md" style="margin-top: 20px">
-    <ul id= "routeList" class="list-group">
-    </ul>
+    <div id= "routeList" class="row">
+  </div>
   </div>
 </body>
-<script>
-  let template;
-  $.ajax({
-    url: '/example1Template',
-    cache: true,
-    success: function(data) {
-        const source = data;
-        template = Handlebars.compile(source); //Using Handlebars as the templating engine
-    }               
-  })
-
-  function getRoutes() {
-    $.ajax({
-      url: '/example1/solution',
-      success: function(data) {
-        $(data).each(function (index, value) {
-          let html = template(value); //Replace each empty field in html template with parsed RSS data
-          $('#routeList').append(html); //Inject finalized template into article list html element
-        });
-      }
-    })
-  }
+<script src="/js/example3">
 </script>
 </html> 

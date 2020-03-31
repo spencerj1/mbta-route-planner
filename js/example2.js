@@ -57,10 +57,10 @@ function getStopRange(routeStopList, callback){
         },
       }
     }else if(totalStops >= resultJson.mostStops.totalStops){
-      resultJson.mostStops.name = key
+      resultJson.mostStops.line = key
       resultJson.mostStops.totalStops = totalStops
     }else if(totalStops <= resultJson.leastStops.totalStops){
-      resultJson.leastStops.name = key
+      resultJson.leastStops.line = key
       resultJson.leastStops.totalStops = totalStops
     }
     counter++
